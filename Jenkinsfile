@@ -1,4 +1,3 @@
-
 pipeline {
     agent any
 
@@ -7,11 +6,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/SHASHIKUMARM1994/ecommerce-3tier-app.git'
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
@@ -27,10 +21,10 @@ pipeline {
                 docker run -d \
                   --name backend \
                   -p 3000:3000 \
-                  -e DB_HOST=${DB_HOST} \
-                  -e DB_USER=${DB_USER} \
-                  -e DB_PASS=${DB_PASS} \
-                  -e DB_NAME=${DB_NAME} \
+                  -e DB_HOST=$DB_HOST \
+                  -e DB_USER=$DB_USER \
+                  -e DB_PASS=$DB_PASS \
+                  -e DB_NAME=$DB_NAME \
                   $IMAGE_NAME
                 '''
             }
